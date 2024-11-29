@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="This is a user-friendly task management tool designed to help you organize,
+    prioritize, and track your tasks efficiently. Perfect for
+    individuals or teams aiming to stay on top of their goals!" />
+    <title>Task Master dashboard</title>
+    <link rel="shortcut icon" href="image/planning.png" type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="css/dashboard.css" />
+  </head>
+  <body>
+    <section class="con">
+        <header>
+          <!-- Search Bar -->
+          <section class="search">
+            <input type="text" id="search-keyword" placeholder="Search tasks..." />
+            <button id="searchButton" onclick="searchTasks()">Search</button>
+            <button id="searchButton" onclick="toggleFilterInput(true)">Filter</button>
+          </section>
+          <a href="login.html"><span class="fa-solid fa-arrow-right-from-bracket"></span></a>
+        </header>
+
+        <!-- filter -->
+        <section class="filter-bar" style="display: none">
+          <a href="dashboard.html"><span class="fa-solid fa-xmark" style="color: inherit;"></span></a>
+          <br>
+            <select id="filter-priority" onchange="filterTasks()">
+              <option value="">Filter by Priority</option>
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+            </select>
+            <input type="date" id="filter-date" onchange="filterTasks()" />
+            <button id="filter" onclick="resetFilters()">Reset Filters</button>
+          </section>
+  
+        <!-- Add btn -->
+  
+        <section class="calendar">
+          <section class="add">
+            <button onclick="toggleTaskForm(true)">+ Add Task</button>
+          </section>
+        </section>
+
+
+    <div class="container">
+      <h1>Tasks</h1>
+      <div id="task-form" class="task-form" style="display: none">
+        <a href="dashboard.html"><span class="fa-solid fa-xmark" style="color: inherit;"></span></a>
+        <br>
+        <input type="text" id="task-title" placeholder="Task Title" required />
+        <input
+          type="text"
+          id="task-desc"
+          placeholder="Task Description"
+          required
+        />
+        <select id="task-priority">
+          <option id="low" value="Low">Low</option>
+          <option id="med" value="Medium">Medium</option>
+          <option id="high" value="High">High</option>
+        </select>
+        <input type="date" id="task-date" />
+        <button id="btn" onclick="addTask()">Add Task</button>
+      </div>
+
+      <ul id="task-list"></ul>
+    </div>
+    <script src="Js/dashboard.js"></script>
+  </body>
+</html>

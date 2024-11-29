@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="This is a user-friendly task management tool designed to help you organize,
+    prioritize, and track your tasks efficiently. Perfect for
+    individuals or teams aiming to stay on top of their goals!"
+    />
+    <title>log in page</title>
+    <link rel="shortcut icon" href="image/planning.png" type="image/x-icon" />
+    <link rel="stylesheet" href="./css/login.css" />
+  </head>
+  <body>
+    <section class="con">
+      <h1>Task Master</h1>
+      <br />
+      <section class="form-con">
+        <form action="dashboard.html">
+          <h2>Log in</h2>
+          <section class="input-con">
+            <label for="number">Phone number</label>
+            <input
+              type="tel"
+              name="number"
+              id="number"
+              placeholder="Enter your phone number"
+              required
+            />
+          </section>
+          <section class="input-con">
+            <label for="password">Enter password</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Enter password"
+              required
+            />
+          </section>
+          <button class="btn">Log in</button>
+          <section class="acct">
+            <p>Don't have an account? <a href="index.html">Sign up</a></p>
+          </section>
+        </form>
+      </section>
+    </section>
+
+    <script>
+      const API_URL = "http://localhost:5000/api/login";
+
+      document.querySelector("form").addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const phone = document.getElementById("number").value.trim();
+        const password = document.getElementById("password").value.trim();
+
+        if (!phone || !password) {
+          alert("Please fill in all fields.");
+          return;
+        }
+
+        try {
+          // Send POST request using Axios
+          const response = await axios.post(API_URL, { phone, password });
+
+          // Process the response
+          alert(response.data.message);
+
+          // Save the JWT token in localStorage or cookies
+          localStorage.setItem("token", response.data.token);
+
+          // Redirect to dashboard
+          window.location.href = "dashboard.html";
+        } catch (error) {
+          console.error("Error:", error);
+
+          // Handle error responses
+          if (error.response) {
+            alert(error.response.data.message || "An error occurred.");
+          } else {
+            alert("Network error occurred. Please try again.");
+          }
+        }
+      });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </body>
+</html>

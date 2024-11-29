@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="This is a user-friendly task management tool designed to help you organize,
+    prioritize, and track your tasks efficiently. Perfect for
+    individuals or teams aiming to stay on top of their goals!"
+    />
+    <title>Task Master</title>
+    <link rel="shortcut icon" href="image/planning.png" type="image/x-icon" />
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <section class="con">
+      <h1>Welcome To Task Master</h1>
+      <br />
+      <p>
+        A user-friendly task management tool designed to help you organize,
+        prioritize, and track your tasks efficiently. With features like task
+        creation, filtering by priority and date, and seamless updates, it
+        streamlines your workflow and boosts productivity. Perfect for
+        individuals or teams aiming to stay on top of their goals!
+      </p>
+      <br />
+      <section class="form-con">
+        <form action="dashboard.html">
+          <h2>Sign Up</h2>
+          <section class="input-con">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              placeholder="Enter your name"
+              required
+            />
+          </section>
+          <section class="input-con">
+            <label for="number">Phone number</label>
+            <input
+              type="tel"
+              name="number"
+              id="number"
+              placeholder="Enter your phone number"
+              required
+            />
+          </section>
+          <section class="input-con">
+            <label for="dob">Date of birth</label>
+            <input type="date" name="dob" id="dob" required />
+          </section>
+          <section class="input-con">
+            <label for="password">Enter password</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Enter password"
+              required
+            />
+          </section>
+          <section class="input-con">
+            <label for="password">Confirm password</label>
+            <input
+              type="cpwd"
+              name="cpwd"
+              id="cpwd"
+              placeholder="Confirm password"
+              required
+            />
+          </section>
+          <button class="btn">Sign up</button>
+          <section class="acct">
+            <p>Got an account? <a href="login.html">Log in</a></p>
+          </section>
+        </form>
+      </section>
+    </section>
+
+    <script>
+      const API_URL = "http://localhost:5000/api/signup";
+
+      document.querySelector("form").addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const name = document.getElementById("name").value;
+        const phone = document.getElementById("number").value;
+        const dob = document.getElementById("dob").value;
+        const password = document.getElementById("password").value;
+        const cpwd = document.getElementById("cpwd").value;
+
+        
+
+        try {
+          const xhr = new XMLHttpRequest();
+
+          // Open a POST request
+          xhr.open("POST", API_URL, true);
+          xhr.setRequestHeader("Content-Type", "application/json");
+
+          // Set up a promise to handle the response
+          const result = await new Promise((resolve, reject) => {
+            xhr.onreadystatechange = function () {
+              if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                  resolve(JSON.parse(xhr.responseText));
+                } else {
+                  reject(JSON.parse(xhr.responseText));
+                }
+              }
+            };
+
+            // Handle network errors
+            xhr.onerror = function () {
+              reject({ message: "Network error occurred." });
+            };
+
+            // Send the request with the JSON payload
+            xhr.send(JSON.stringify({ name, phone, dob, password, cpwd }));
+          });
+
+          // Handle the response
+          alert(result.message);
+          window.location.href = "login.html";
+        } catch (error) {
+          console.error("Error:", error);
+          alert(error.message || "An error occurred. Please try again.");
+        }
+      });
+    </script>
+  </body>
+</html>
