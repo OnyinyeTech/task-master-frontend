@@ -38,7 +38,7 @@ function toggleFilterInput(show, filter = null) {
 
 // Add a new task
 
-const API_URL = "https://taskmaster-backend-api.fly.dev/api/tasks";
+const API_URL = "https://backend-snowy-snow-5492.fly.dev/api/tasks";
 
 function addTask() {
   const token = localStorage.getItem("token"); // Get JWT from localStorage
@@ -95,7 +95,7 @@ function deleteTask(taskId) {
   }
 
   const xhr = new XMLHttpRequest();
-  xhr.open("DELETE", `https://taskmaster-backend-api.fly.dev/api/tasks/${taskId}`, true);
+  xhr.open("DELETE", `https://backend-snowy-snow-5492.fly.dev/api/tasks/${taskId}`, true);
   xhr.setRequestHeader("Authorization", `Bearer ${token}`);
 
   xhr.onreadystatechange = function () {
@@ -147,7 +147,7 @@ function updateTask(taskId) {
   const date = document.getElementById("task-date").value;
 
   const xhr = new XMLHttpRequest();
-  xhr.open("PUT", `https://taskmaster-backend-api.fly.dev/api/tasks/${taskId}`, true);
+  xhr.open("PUT", `https://backend-snowy-snow-5492.fly.dev/api/tasks/${taskId}`, true);
   xhr.setRequestHeader("Authorization", `Bearer ${token}`);
   xhr.setRequestHeader("Content-Type", "application/json");
 
@@ -195,7 +195,7 @@ async function searchTasks() {
     const xhr = new XMLHttpRequest();
     xhr.open(
       "GET",
-      `https://taskmaster-backend-api.fly.dev/api/tasks/search?keyword=${encodeURIComponent(
+      `https://backend-snowy-snow-5492.fly.dev/api/tasks/search?keyword=${encodeURIComponent(
         keyword
       )}`,
       true
@@ -268,7 +268,7 @@ async function filterTasks() {
   // Remove trailing "&"
   if (query.endsWith("&")) query = query.slice(0, -1);
 
-  const API_URL = `https://taskmaster-backend-api.fly.dev/api/tasks/filter?${query}`;
+  const API_URL = `https://backend-snowy-snow-5492.fly.dev/api/tasks/filter?${query}`;
 
   try {
     const response = await fetch(API_URL, {
@@ -316,7 +316,7 @@ async function loadTasks() {
 
   try {
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", "https://taskmaster-backend-api.fly.dev/api/tasks", true);
+    xhr.open("GET", "https://backend-snowy-snow-5492.fly.dev/api/tasks", true);
     xhr.setRequestHeader("Authorization", `Bearer ${token}`);
 
     xhr.onreadystatechange = function () {
